@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mysql:
+    image: 'mysql:5.7'
+    expose:
+      - '3306'
+    ports:
+      - '3306:3306'
+    volumes:
+      - './data/mysql:/var/lib/mysql'
+    restart: on-failure
+    env_file:
+      - docker.env
+  webpack:
+    build:
+      context: .
+      dockerfile: docker.webpack
+    image: auth-node-server
+    expose:
+      - '3000'
+    ports:
+      - '3000:3000'
+    container_name: auth-node-server
+    volumes:
+      - '.:/app'
+volumes:
+  wwwroot:
+    driver: local

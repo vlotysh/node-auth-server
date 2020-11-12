@@ -1,0 +1,18 @@
+FROM ubuntu:latest
+
+WORKDIR /app
+COPY . /app
+
+RUN apt-get update
+RUN apt-get install curl -y
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install nodejs -y
+
+RUN npm install uglify-js webpack webpack-cli -g | npm install
+RUN npm install -g nodemon
+RUN npm add @babel/runtime
+
+EXPOSE 3000 
+
+#CMD tail -f /dev/null
+
+CMD npm start
