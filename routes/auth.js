@@ -1,16 +1,14 @@
 const router = require('express').Router();
 const User = require('../model/User');
-const validation = require('../validation')
+const { registerValidation } = require('../validation')
 
 
 
 router.post('/register', async (req, res) => {
-    
-    const { error} = validation.registerValidation(req.body);
-    ;
+    const { error } = registerValidation(req.body);
 
     if (error) {
-        const response = error.details.map(function( err ) {
+        const response = error.details.map(function (err) {
             return err.message;
         }).join(', ');
 
@@ -26,7 +24,7 @@ router.post('/register', async (req, res) => {
     try {
         const savedUser = await user.save();
         res.send(savedUser);
-    } catch(err) {
+    } catch (err) {
         res.statusCode(400).send(err);
     }
 });
