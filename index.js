@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+// Import routes
+const authRoute = require('./routes/auth')
 
 dotenv.config();
 
@@ -12,8 +14,10 @@ mongoose.connect(
     () => console.log('Connected to db')
 );
 
-// Import routes
-const authRoute = require('./routes/auth')
+//Middleware
+
+app.use(express.json());
+
 
 //Route middlewares
 app.use('/api/user', authRoute);
