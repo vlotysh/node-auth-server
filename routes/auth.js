@@ -3,6 +3,8 @@ const User = require('../model/User');
 const { registerValidation, loginValidation } = require('../validation')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+dotenv.config();
 
 router.post('/register', async (req, res) => {
     const { error } = registerValidation(req.body);
@@ -66,7 +68,9 @@ router.post('/login', async (req, res) => {
         return res.status(400).send('Invalid password');
     }
 
-    res.send('Loged in');
+
+    const token = jwt.sign({_id: existedUser.id, email: existedUser.email}, process.env.TOKEN_SICRET);
+    res.header('auth-token', token).send(token);
 });
 
 module.exports = router;
