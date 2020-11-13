@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const User = require('../model/User');
-const { registerValidation } = require('../validation')
-var bcrypt = require('bcryptjs');
+const { registerValidation, loginValidation } = require('../validation')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post('/register', async (req, res) => {
     const { error } = registerValidation(req.body);
@@ -32,14 +33,40 @@ router.post('/register', async (req, res) => {
 
     try {
         const savedUser = await user.save();
-        res.send(savedUser);
+        res.send({'userId': user.id});
     } catch (err) {
         res.statusCode(400).send(err);
     }
 });
 
-router.post('/login', (req, res) => {
-    res.send('Login');
+router.post('/login', async (req, res) => {
+    const { error } = loginValidation(req.body);
+
+    if (error) {
+        const response = error.details.map(function (err) {
+            return err.message;
+        }).join(', ');
+
+        return res.status(400).send(response);
+    }
+
+    const email = req.body.email;
+    const password = req.body.password;
+    const existedUser = await User.findOne({'email': email});
+
+    if (!existedUser) {
+        return res.status(400).send('Email or password is wrong');
+    }
+
+    //password validation
+
+    const validPass = await bcrypt.compare(password, existedUser.password);
+
+    if (!validPass) {
+        return res.status(400).send('Invalid password');
+    }
+
+    res.send('Loged in');
 });
 
 module.exports = router;
