@@ -41,7 +41,7 @@ function logResponseBody(req, res, next) {
   }
   
 
-app.use(logResponseBody);
+//app.use(logResponseBody);
 
 //Middleware
 
