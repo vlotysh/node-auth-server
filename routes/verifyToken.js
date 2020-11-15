@@ -7,10 +7,11 @@ module.exports =function(req, res, next) {
     }
 
     try {
-        const verified = jwt.verify(token, process.env.TOKEN_SICRET);
+        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        console.log(verified);
         req.user = verified;    
         next();
     } catch(err) {
-        return  res.status(401).send({'error': 'Invalid token'});
+        return  res.status(401).send({'error': 'Invalid token', 'now': Math.floor(Date.now() / 1000)});
     }
 }

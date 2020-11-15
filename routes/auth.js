@@ -7,7 +7,6 @@ const {register} = require('./register');
 dotenv.config();
 
 router.post('/register', register);
-
 router.post('/login', login);
 router.post('/refresh', refresh)
 
