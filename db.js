@@ -22,16 +22,18 @@ exports.DB = class DB {
         this.connection = connection;
     }
 
-    query(sql) {
+    query(sql, params) {
         let that = this;
         return new Promise(function(resolve, reject) {
             that.connection.query(
-                "SELECT 1", 
-                function(err, rows){                                                
-                    if(rows === undefined){
-                        reject(new Error("Error rows is undefined"));
+                sql,
+                params,
+                function(err, result){                                                
+                    if(err){
+                        console.log(err);
+                        reject(err);
                     }else{
-                        resolve(rows);
+                        resolve(result);
                     }
                 }
             )});
