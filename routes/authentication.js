@@ -4,8 +4,8 @@ const User = require('../model/User');
 
 const {loginValidation } = require('../validation')
 const {generateToken} = require('../token');
-
-
+const {DB} = require('../db');
+ 
 exports.login = async (req, res) => {
     const { error } = loginValidation(req.body);
 
