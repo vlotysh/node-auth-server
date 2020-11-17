@@ -15,7 +15,7 @@ router.get('/', verify, async (req, res) => {
 router.post('/', verify, async (req, res) => {
     const db = new DB();
     const params = [req.body.text,req.body.userId];
-    const sql = 'INSERT INTO note (text, userId) VALUES (?, ?)';
+    const sql = 'INSERT INTO note (text, userId) VALUES (?)';
 
     const result = await db.insert(sql, params);
 

@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../model/User');
 const dotenv = require('dotenv');
 const { registerValidation } = require('../validation');
+const { DB } = require('../db');
 
 exports.register = async (req, res) => {
     const { error } = registerValidation(req.body);
@@ -33,8 +34,14 @@ exports.register = async (req, res) => {
 
     try {
         const savedUser = await user.save();
-        res.send({'userId': user.id});
+        const db = new DB();
+        const sql = 'INSERT INTO users (name, email, password) VALUES (?)';
+    
+        const result = await db.insert(sql, [req.body.name, req.body.email, hasPassword]);
+
+        res.send({'userId': result});
     } catch (err) {
-        res.statusCode(400).send(err);
+        res.status(400).send(err);
     }
+
 }
