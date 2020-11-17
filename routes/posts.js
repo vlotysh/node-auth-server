@@ -5,11 +5,15 @@ const {DB} = require('./../db')
 router.get('/', verify, async (req, res) => {
     const db = new DB();
     const sql = 'SELECT * FROM note';
-    const result = await db.query(sql);
+    const results = await db.query(sql);
+     let posts = [];
 
-    res.json({
-        posts: result
-    });
+      await results.map((result) => {
+        posts.push(JSON.parse(JSON.stringify()));
+      });
+      
+
+      res.json({'posts': posts});
 });
 
 router.post('/', verify, async (req, res) => {

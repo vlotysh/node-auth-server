@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const mysql = require('mysql');
+const util = require('util');
 
 exports.DB = class DB {
     constructor() {
@@ -23,20 +24,9 @@ exports.DB = class DB {
     }
 
     query(sql, params) {
-        let that = this;
-        return new Promise(function(resolve, reject) {
-            that.connection.query(
-                sql,
-                params,
-                function(err, result){                                                
-                    if(err){
-                        console.log(err);
-                        reject(err);
-                    }else{
-                        resolve(result);
-                    }
-                }
-            )});
+        const query = util.promisify(this.connection.query).bind(this.connection);
+
+        return query(sql, params);
     }
 
     insert(sql, params) {
