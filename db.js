@@ -30,11 +30,6 @@ exports.DB = class DB {
     }
 
     insert(sql, params) {
-        console.log(params);
-
-
-
-
         let that = this;
         return new Promise(function(resolve, reject) {
             that.connection.query(

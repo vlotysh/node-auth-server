@@ -11,6 +11,13 @@ services:
     restart: on-failure
     env_file:
       - docker.env
+  redis:
+    image: bitnami/redis:latest
+    user: root
+    environment:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./data/redis:/bitnami
   webpack:
     build:
       context: .
