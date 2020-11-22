@@ -116,4 +116,3 @@ dist
 .pnp.*
 docker.env
 data
-data_docker
