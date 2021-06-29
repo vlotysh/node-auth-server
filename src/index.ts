@@ -1,3 +1,5 @@
+import {Request, Response} from "express";
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -15,26 +17,28 @@ mongoose.connect(
     () => console.log('Connected to db')
 );
 
-function logResponseBody(req, res, next) {
+function logResponseBody(req: Request, res: Response, next: any) {
     var oldWrite = res.write,
         oldEnd = res.end;
+
+    var chunks:any[] = [];
   
-    var chunks = [];
-  
-    res.write = function (chunk) {
+    res.write = function (chunk: any) {
       chunks.push(chunk);
-  
-      return oldWrite.apply(res, arguments);
+
+      // @ts-ignore
+        return oldWrite.apply(res, arguments);
     };
   
-    res.end = function (chunk) {
+    res.end = function (chunk: any) {
       if (chunk)
         chunks.push(chunk);
   
       var body = Buffer.concat(chunks).toString('utf8');
       console.log(req.path, body);
   
-      oldEnd.apply(res, arguments);
+      // @ts-ignore
+        oldEnd.apply(res, arguments);
     };
   
     next();
@@ -47,9 +51,8 @@ function logResponseBody(req, res, next) {
 
 app.use(express.json());
 
-
 //Route middlewares
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 
-app.listen(3000, () => console.log('Server up!!'))
+app.listen(3000, () => console.log('Server up with TS!'))

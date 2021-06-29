@@ -2,9 +2,9 @@
   "name": "auth-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/vlotysh/node-auth-server#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@types/express": "^4.17.12",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -26,6 +27,9 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "@types/node": "^15.12.5",
+    "nodemon": "^2.0.8",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
   }
 }

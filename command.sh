@@ -12,6 +12,7 @@ commands:
 * restart
 * install
 * start
+* npx
 "
 }
 function command_docker() {
@@ -39,6 +40,10 @@ restart)
 install)
     shift
     command_docker run --rm webpack npm install "$@"
+    ;;
+npx)
+    shift
+    command_docker run --rm webpack npx "$@"
     ;;
 start)
     shift
