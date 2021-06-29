@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const verify  = require('./verifyToken')
 const {DB} = require('./../db')
+const {createPostValidation} = require('../validation')
 
 router.get('/', verify, async (req, res) => {
     const db = new DB();
@@ -17,9 +18,19 @@ router.get('/', verify, async (req, res) => {
 });
 
 router.post('/', verify, async (req, res) => {
+    const { error } = createPostValidation(req.body);
+
+    if (error) {
+        const response = error.details.map(function (err) {
+            return err.message;
+        }).join(', ');
+
+        return res.status(400).send(response);
+    }
+
     const db = new DB();
-    const params = [req.body.text,req.body.userId];
-    const sql = 'INSERT INTO note (text, userId) VALUES (?)';
+    const params = [req.body.title, req.body.text,req.body.userId];
+    const sql = 'INSERT INTO note (title, text, userId) VALUES (?)';
 
     const result = await db.insert(sql, params);
 

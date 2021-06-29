@@ -11,6 +11,10 @@ services:
     restart: on-failure
     env_file:
       - docker.env
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
   redis:
     image: bitnami/redis:latest
     user: root

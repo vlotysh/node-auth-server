@@ -39,7 +39,7 @@ function logResponseBody(req, res, next) {
   
     next();
   }
-  
+
 
 //app.use(logResponseBody);
 
@@ -52,4 +52,4 @@ app.use(express.json());
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 
-app.listen(3000, () => console.log('Server up!'))
+app.listen(3000, () => console.log('Server up!!'))
