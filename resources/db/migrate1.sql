@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `users`;
+
 create table users(
       `id` INT NOT NULL AUTO_INCREMENT,
       `name` VARCHAR(100) UNIQUE NOT NULL,

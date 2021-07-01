@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
 
-const generateToken = (payload, secret , options = {}) => {
+const generateToken = (payload: object, secret: string, options = {}) => {
     return jwt.sign(payload, secret, options)
 };
 

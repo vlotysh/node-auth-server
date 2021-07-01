@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "dev:debug": "nodemon --inspect src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -18,15 +19,17 @@
   "homepage": "https://github.com/vlotysh/node-auth-server#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
-    "@types/express": "^4.17.12",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.13",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "typeorm": "^0.2.34"
   },
   "devDependencies": {
+    "@types/express": "^4.17.12",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^15.12.5",
     "nodemon": "^2.0.8",
     "ts-node": "^10.0.0",

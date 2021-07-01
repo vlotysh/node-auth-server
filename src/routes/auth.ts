@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 const {login, refresh} = require('./authentication');
 const {register} = require('./register');

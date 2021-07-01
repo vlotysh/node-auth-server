@@ -1,16 +1,17 @@
+import {Request, Response} from "express";
+import ValidationError from "../validationError";
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../model/User');
-
+const User = require('../model/UserMongo');
 const {loginValidation } = require('../validation')
 const {generateToken} = require('../token');
-const {DB} = require('../db');
- 
-exports.login = async (req, res) => {
+
+exports.login = async (req: Request, res: Response) => {
     const { error } = loginValidation(req.body);
 
     if (error) {
-        const response = error.details.map(function (err) {
+        const response = error.details.map(function (err: ValidationError) {
             return err.message;
         }).join(', ');
 
@@ -39,7 +40,7 @@ exports.login = async (req, res) => {
     res.header('auth-token', token).send({'token': token, 'refreshToken': refreshToken, 'expiresIn': tokenExperation, 'now': Math.floor(Date.now() / 1000)});
 }
 
-exports.refresh = async (req, res) => {
+exports.refresh = async (req: Request, res: Response) => {
     const oldRefreshToken = req.body.refreshToken;
 
     try {
@@ -55,14 +56,15 @@ exports.refresh = async (req, res) => {
     }
 } 
 
-function generatesTokens(payload) {
+function generatesTokens(payload: object) {
     console.log(process.env.REFRESH_TOKEN_LIFE);
-    const tokenExperation = Math.floor(Date.now() / 1000) + parseInt(process.env.TOKEN_LIFE);
-    const refreshTokenExperation = Math.floor(Date.now() / 1000) + parseInt(process.env.REFRESH_TOKEN_LIFE);
+    let tokenLife:string = process.env.TOKEN_LIFE!;
+    let tokenExperation: number;
+    tokenExperation = Math.floor(Date.now() / 1000) + parseInt(tokenLife);
+    const refreshTokenExperation = Math.floor(Date.now() / 1000) + parseInt(tokenLife);
 
-
-    const token = generateToken(payload, process.env.TOKEN_SECRET, {'expiresIn': parseInt(process.env.TOKEN_LIFE)});
-    const refreshToken = generateToken(payload , process.env.REFRESH_TOKEN_SECRET, {'expiresIn': parseInt(process.env.REFRESH_TOKEN_LIFE)});
+    const token = generateToken(payload, process.env.TOKEN_SECRET, {'expiresIn': parseInt(tokenLife)});
+    const refreshToken = generateToken(payload , process.env.REFRESH_TOKEN_SECRET, {'expiresIn': parseInt(tokenLife)});
 
     return {
         token,
