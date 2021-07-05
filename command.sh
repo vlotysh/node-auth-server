@@ -6,6 +6,7 @@ Usage:
 $ ./command.sh COMMAND [COMMAND_ARGS...]
 
 commands:
+* build
 * up
 * down
 * stop
@@ -21,6 +22,10 @@ function command_docker() {
 }
 
 case "$1" in
+build)
+    shift
+    command_docker build "$@"
+    ;;
 up)
     shift
     command_docker up "$@"
