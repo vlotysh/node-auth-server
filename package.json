@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "start": "nodemon",
-    "dev:debug": "nodemon --inspect src/index.ts"
+    "start": "nodemon --inspect=-0.0.0.0:9229",
+    "dev:debug": "nodemon --exec \"node --inspect-brk=0.0.0.0:9229 --require ts-node/register src/index.ts\""
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "pwa-node",
+        "request": "attach",
+        "name": "Attach to Remote",
+        "port": 9229,
+        "localRoot": "/Users/test/www/node-auth-server",
+        "remoteRoot": "/app",
+        "sourceMaps": true,
+
+        "address": "127.0.0.1",
+        "skipFiles": [
+          "<node_internals>/**"
+        ],
+      },
+    ]
+  }
