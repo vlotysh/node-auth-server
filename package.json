@@ -5,8 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "nodemon --inspect=-0.0.0.0:9229",
-    "debug": "node --inspect=0.0.0.0:9229 build/index.js",
-    "debug-2": "nodemon --exec \"node --inspect-brk=0.0.0.0:9229 --require ts-node/register src/index.ts\""
+    "dev:debug": "nodemon --exec \"node --inspect-brk=0.0.0.0:9229 --require ts-node/register src/index.ts\""
   },
   "repository": {
     "type": "git",

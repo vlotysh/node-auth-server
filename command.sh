@@ -13,6 +13,7 @@ commands:
 * restart
 * install
 * start
+* debug
 * npx
 "
 }
@@ -53,6 +54,10 @@ npx)
 start)
     shift
     command_docker run --rm webpack npm start "$@"
+    ;;
+debug)
+    shift
+    command_docker run --rm webpack npm dev:debug "$@"
     ;;
 *)
     show_help
