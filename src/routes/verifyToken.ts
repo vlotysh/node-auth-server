@@ -9,7 +9,7 @@ declare type nextCallBack = () => void;
 module.exports = function(req: Request, res: Response, next: nextCallBack) {
     const token: string | undefined = req.header('Authorization');
     if (!token) {
-        return  res.status(401).send('Access Denined');
+        return  res.status(401).send('Access Denied!');
     }
 
     try {

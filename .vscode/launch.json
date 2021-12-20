@@ -6,7 +6,7 @@
         "request": "attach",
         "name": "Attach to Remote",
         "port": 9229,
-        "localRoot": "/Users/test/www/node-auth-server",
+        "localRoot": "/Users/vlad/Web-dev/node-auth-server",
         "remoteRoot": "/app",
         "sourceMaps": true,
 
