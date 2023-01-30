@@ -43,6 +43,13 @@ services:
       - mysql
     volumes:
       - '.:/app'
+  webpack_cli:
+    build:
+      context: .
+      dockerfile: docker.webpack
+    container_name: webpack_cli
+    volumes:
+      - '.:/app'
 volumes:
   wwwroot:
     driver: local

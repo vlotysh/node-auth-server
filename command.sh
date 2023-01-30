@@ -45,7 +45,7 @@ restart)
     ;;
 install)
     shift
-    command_docker run --rm webpack npm install "$@"
+    command_docker run --rm webpack_cli npm install "$@"
     ;;
 npx)
     shift
